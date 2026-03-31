@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meher Sagar — IT Support & Web Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #070b14;
+  --surface: #0d1424;
+  --accent: #00d4ff;
+  --accent2: #7b61ff;
+  --accent3: #00ffb3;
+  --text: #e8edf5;
+  --muted: #6b7fa3;
+  --border: rgba(0,212,255,0.12);
+  --glow: 0 0 40px rgba(0,212,255,0.15);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;cursor:none;}
+#cursor{width:12px;height:12px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:transform 0.15s ease;mix-blend-mode:screen;}
+#cursor-ring{width:36px;height:36px;border:1.5px solid rgba(0,212,255,0.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transition:transform 0.35s cubic-bezier(.23,1,.32,1);}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;animation:float 8s ease-in-out infinite;z-index:0;}
+.orb-1{width:400px;height:400px;background:rgba(0,212,255,0.06);top:10%;left:-100px;}
+.orb-2{width:350px;height:350px;background:rgba(123,97,255,0.06);top:50%;right:-80px;animation-delay:-3s;}
+.orb-3{width:300px;height:300px;background:rgba(0,255,179,0.04);bottom:10%;left:30%;animation-delay:-6s;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.4)}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(20px);background:rgba(7,11,20,0.85);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:0.05em;color:var(--accent);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:0.78rem;letter-spacing:0.08em;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent);}
+.nav-cta{background:transparent;border:1px solid var(--accent);color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;padding:8px 20px;border-radius:4px;cursor:pointer;transition:all 0.25s;text-decoration:none;}
+.nav-cta:hover{background:var(--accent);color:var(--bg);}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:120px 40px 80px;position:relative;z-index:1;}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);padding:6px 16px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;color:var(--accent);margin-bottom:24px;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite;}
+.hero-name{font-family:'Syne',sans-serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:800;line-height:1.0;letter-spacing:-0.02em;margin-bottom:8px;}
+.hero-name span{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,var(--accent3) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-role{font-family:'Syne',sans-serif;font-size:clamp(1.1rem,2vw,1.4rem);font-weight:600;color:var(--muted);margin-bottom:28px;}
+.hero-desc{font-size:1rem;color:var(--muted);line-height:1.8;max-width:460px;margin-bottom:40px;}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;padding:14px 32px;border-radius:6px;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 0 30px rgba(0,212,255,0.3);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(0,212,255,0.45);}
+.btn-ghost{background:transparent;color:var(--text);font-family:'Syne',sans-serif;font-weight:600;font-size:0.9rem;padding:14px 32px;border-radius:6px;border:1px solid var(--border);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+/* PROFILE CARD */
+.profile-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px;position:relative;overflow:hidden;box-shadow:var(--glow);}
+.profile-card::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(123,97,255,0.1) 0%,transparent 70%);}
+.profile-avatar{width:90px;height:90px;border-radius:50%;overflow:hidden;margin-bottom:20px;border:3px solid var(--accent);box-shadow:0 0 20px rgba(0,212,255,0.4);flex-shrink:0;}
+.profile-avatar img{width:100%;height:100%;object-fit:cover;object-position:center 10%;display:block;border-radius:50%;}
+.profile-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.3rem;}
+.profile-title{color:var(--accent);font-size:0.85rem;margin-bottom:12px;}
+.profile-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+.stat-box{background:rgba(0,212,255,0.05);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;}
+.stat-num{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-label{font-size:0.72rem;color:var(--muted);letter-spacing:0.05em;margin-top:2px;}
+.contact-pills{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+.pill{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:0.8rem;color:var(--muted);text-decoration:none;transition:all 0.2s;}
+.pill:hover{border-color:var(--accent);color:var(--accent);}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:100px 40px;max-width:1100px;margin:0 auto;}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.15em;color:var(--accent);text-transform:uppercase;margin-bottom:12px;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.1;margin-bottom:48px;}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+.skill-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all 0.3s;position:relative;overflow:hidden;}
+.skill-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.skill-card:hover{border-color:rgba(0,212,255,0.3);transform:translateY(-4px);box-shadow:var(--glow);}
+.skill-card:hover::after{transform:scaleX(1);}
+.skill-icon{font-size:1.8rem;margin-bottom:14px;}
+.skill-category{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:14px;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:7px;}
+.tag{background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.15);color:var(--muted);font-size:0.72rem;font-family:'JetBrains Mono',monospace;padding:4px 10px;border-radius:4px;transition:all 0.2s;}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:32px;}
+.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),transparent);}
+.timeline-item{position:relative;margin-bottom:48px;}
+.timeline-item::before{content:'';position:absolute;left:-38px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 12px var(--accent);}
+.timeline-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;transition:all 0.3s;}
+.timeline-card:hover{border-color:rgba(0,212,255,0.3);box-shadow:var(--glow);}
+.timeline-meta{display:flex;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap;}
+.timeline-date{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--accent);background:rgba(0,212,255,0.08);padding:3px 10px;border-radius:4px;}
+.timeline-institution{font-size:0.85rem;color:var(--muted);}
+.timeline-degree{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:6px;}
+.timeline-score{display:inline-flex;align-items:center;gap:6px;background:rgba(0,255,179,0.08);border:1px solid rgba(0,255,179,0.2);color:var(--accent3);font-size:0.78rem;font-family:'JetBrains Mono',monospace;padding:3px 10px;border-radius:4px;margin-top:8px;}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:32px;transition:all 0.3s;position:relative;overflow:hidden;}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent2),transparent);}
+.project-card:hover{border-color:rgba(123,97,255,0.4);transform:translateY(-5px);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+.project-num{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;line-height:1;color:rgba(0,212,255,0.08);margin-bottom:16px;}
+.project-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;margin-bottom:12px;}
+.project-desc{font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:20px;}
+.project-tech{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px;}
+.tech-tag{background:rgba(123,97,255,0.1);border:1px solid rgba(123,97,255,0.25);color:var(--accent2);font-size:0.72rem;font-family:'JetBrains Mono',monospace;padding:4px 10px;border-radius:4px;}
+.project-points{list-style:none;}
+.project-points li{font-size:0.83rem;color:var(--muted);padding:5px 0 5px 16px;position:relative;}
+.project-points li::before{content:'▸';position:absolute;left:0;color:var(--accent3);font-size:0.7rem;}
+
+/* CERTS */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;}
+.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:12px;transition:all 0.3s;}
+.cert-card:hover{border-color:rgba(0,212,255,0.35);transform:translateY(-3px);box-shadow:var(--glow);}
+.cert-icon{font-size:2rem;}
+.cert-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;}
+.cert-issuer{font-size:0.82rem;color:var(--muted);}
+.cert-status{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;padding:3px 10px;border-radius:4px;align-self:flex-start;}
+.status-progress{background:rgba(255,183,0,0.1);border:1px solid rgba(255,183,0,0.3);color:#ffb700;}
+.status-done{background:rgba(0,255,179,0.08);border:1px solid rgba(0,255,179,0.25);color:var(--accent3);}
+
+/* LEADERSHIP */
+.leadership-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:40px;display:flex;gap:32px;align-items:flex-start;transition:all 0.3s;background:linear-gradient(135deg,var(--surface) 0%,rgba(123,97,255,0.05) 100%);}
+.leadership-card:hover{border-color:rgba(123,97,255,0.35);box-shadow:0 0 40px rgba(123,97,255,0.1);}
+.leadership-icon{width:60px;height:60px;border-radius:14px;flex-shrink:0;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;font-size:1.6rem;}
+.leadership-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.2rem;margin-bottom:8px;}
+.leadership-desc{font-size:0.9rem;color:var(--muted);line-height:1.7;}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.contact-link{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 20px;text-decoration:none;color:var(--text);font-size:0.88rem;transition:all 0.25s;margin-bottom:12px;}
+.contact-link:hover{border-color:var(--accent);color:var(--accent);transform:translateX(4px);}
+.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.form-label{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;color:var(--muted);}
+.form-input,.form-textarea{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;resize:none;}
+.form-input:focus,.form-textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,255,0.08);}
+.form-textarea{height:120px;}
+
+/* SKILL BARS */
+.skill-bar-row{margin-bottom:16px;}
+.skill-bar-header{display:flex;justify-content:space-between;margin-bottom:6px;}
+.skill-bar-name{font-size:0.85rem;color:var(--text);}
+.skill-bar-pct{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--accent);}
+.skill-bar-track{height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;}
+.skill-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width 1.4s cubic-bezier(.23,1,.32,1);}
+
+/* SOFT SKILLS */
+.soft-skills{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+.soft-pill{display:flex;align-items:center;gap:8px;background:rgba(0,212,255,0.05);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:0.82rem;}
+.soft-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);flex-shrink:0;}
+
+/* FADE UP ANIMATION */
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:40px;text-align:center;font-size:0.82rem;color:var(--muted);}
+footer span{color:var(--accent);}
+
+@media(max-width:768px){
+  nav{padding:16px 20px;}
+  .nav-links{display:none;}
+  #hero{padding:100px 20px 60px;}
+  .hero-inner{grid-template-columns:1fr;gap:40px;}
+  section{padding:70px 20px;}
+  .contact-grid{grid-template-columns:1fr;gap:40px;}
+  .leadership-card{flex-direction:column;gap:20px;}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">MS.</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:mehersagar.sundar@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-inner">
+    <div class="fade-up">
+      <div class="hero-badge"><span class="badge-dot"></span> Available for opportunities</div>
+      <h1 class="hero-name">Meher<br><span>Sagar</span></h1>
+      <p class="hero-role">IT Support Specialist &amp; Web Developer</p>
+      <p class="hero-desc">MCA graduate with strong foundations in IT support, networking, and web development. Passionate about solving technical challenges and delivering seamless user experiences.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">View Projects ↓</a>
+        <a href="#contact" class="btn-ghost">Get In Touch →</a>
+      </div>
+    </div>
+    <div class="fade-up" style="transition-delay:0.2s">
+      <div class="profile-card">
+        <div class="profile-avatar">
+          <img src="data:image/jpeg;base64,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" alt="Meher Sagar">
+        </div>
+        <div class="profile-name">Meher Sagar</div>
+        <div class="profile-title">IT Support · Web Dev · MCA Student</div>
+        <div class="profile-stats">
+          <div class="stat-box"><div class="stat-num">2+</div><div class="stat-label">Projects</div></div>
+          <div class="stat-box"><div class="stat-num">3+</div><div class="stat-label">Certifications</div></div>
+          <div class="stat-box"><div class="stat-num">30+</div><div class="stat-label">Volunteers Led</div></div>
+          <div class="stat-box"><div class="stat-num">6.7</div><div class="stat-label">MCA CGPA</div></div>
+        </div>
+        <div class="contact-pills">
+          <a href="mailto:mehersagar.sundar@gmail.com" class="pill">✉️ mehersagar.sundar@gmail.com</a>
+          <a href="tel:+916301863691" class="pill">📱 +91 6301863691</a>
+          <a href="https://github.com/mehersagar23" class="pill" target="_blank">🐙 github.com/mehersagar23</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label fade-up">02 / Expertise</p>
+  <h2 class="section-title fade-up">Technical <span style="color:var(--accent)">Skills</span></h2>
+  <div class="skills-grid">
+    <div class="skill-card fade-up">
+      <div class="skill-icon">🖥️</div>
+      <div class="skill-category">Desktop Support</div>
+      <div class="skill-tags">
+        <span class="tag">L1 Support</span><span class="tag">End User Support</span><span class="tag">Hardware Troubleshooting</span><span class="tag">Remote Support</span><span class="tag">Software Installation</span><span class="tag">System Config</span><span class="tag">Printer Setup</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon">⚙️</div>
+      <div class="skill-category">Operating Systems</div>
+      <div class="skill-tags">
+        <span class="tag">Windows 10/11</span><span class="tag">Windows Server</span><span class="tag">Active Directory</span><span class="tag">User Account Mgmt</span><span class="tag">Linux Commands</span><span class="tag">CMD / Terminal</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-category">Networking</div>
+      <div class="skill-tags">
+        <span class="tag">TCP/IP</span><span class="tag">DNS</span><span class="tag">DHCP</span><span class="tag">LAN/WAN</span><span class="tag">IP Configuration</span><span class="tag">VPN Support</span><span class="tag">Connectivity Troubleshooting</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon">🎫</div>
+      <div class="skill-category">Service Desk &amp; ITSM</div>
+      <div class="skill-tags">
+        <span class="tag">Incident Management</span><span class="tag">ITIL Basics</span><span class="tag">SLA Awareness</span><span class="tag">Problem Management</span><span class="tag">Escalation Procedures</span><span class="tag">ServiceNow</span><span class="tag">Jira</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon">💻</div>
+      <div class="skill-category">Web &amp; Database</div>
+      <div class="skill-tags">
+        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">Flexbox</span><span class="tag">Responsive Design</span><span class="tag">MySQL</span><span class="tag">Basic SQL</span>
+      </div>
+    </div>
+    <div class="skill-card fade-up">
+      <div class="skill-icon">📢</div>
+      <div class="skill-category">Digital Marketing</div>
+      <div class="skill-tags">
+        <span class="tag">SEO Basics</span><span class="tag">Social Media Marketing</span><span class="tag">Content Marketing</span><span class="tag">Google Ads</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:60px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;">
+    <div class="fade-up">
+      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:28px;font-size:1.1rem;">Proficiency Levels</h3>
+      <div class="skill-bar-row"><div class="skill-bar-header"><span class="skill-bar-name">IT Support / Help Desk</span><span class="skill-bar-pct">80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
+      <div class="skill-bar-row"><div class="skill-bar-header"><span class="skill-bar-name">HTML / CSS</span><span class="skill-bar-pct">75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div></div>
+      <div class="skill-bar-row"><div class="skill-bar-header"><span class="skill-bar-name">Windows OS / Active Directory</span><span class="skill-bar-pct">72%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="72"></div></div></div>
+      <div class="skill-bar-row"><div class="skill-bar-header"><span class="skill-bar-name">Networking Fundamentals</span><span class="skill-bar-pct">68%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="68"></div></div></div>
+      <div class="skill-bar-row"><div class="skill-bar-header"><span class="skill-bar-name">JavaScript</span><span class="skill-bar-pct">55%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="55"></div></div></div>
+      <div class="skill-bar-row"><div class="skill-bar-header"><span class="skill-bar-name">MySQL / SQL</span><span class="skill-bar-pct">50%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="50"></div></div></div>
+    </div>
+    <div class="fade-up">
+      <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:28px;font-size:1.1rem;">Soft Skills</h3>
+      <div class="soft-skills">
+        <div class="soft-pill"><span class="soft-pill-dot"></span>Problem Solving</div>
+        <div class="soft-pill"><span class="soft-pill-dot"></span>Communication</div>
+        <div class="soft-pill"><span class="soft-pill-dot"></span>Customer Handling</div>
+        <div class="soft-pill"><span class="soft-pill-dot"></span>Team Collaboration</div>
+        <div class="soft-pill"><span class="soft-pill-dot"></span>Time Management</div>
+        <div class="soft-pill"><span class="soft-pill-dot"></span>Quick Learner</div>
+        <div class="soft-pill"><span class="soft-pill-dot"></span>Adaptability</div>
+        <div class="soft-pill"><span class="soft-pill-dot"></span>Leadership</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" style="max-width:100%;padding:100px 40px;background:linear-gradient(to bottom,transparent,rgba(123,97,255,0.03),transparent);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p class="section-label fade-up">03 / Background</p>
+    <h2 class="section-title fade-up">Education <span style="color:var(--accent)">Timeline</span></h2>
+    <div class="timeline">
+      <div class="timeline-item fade-up">
+        <div class="timeline-card">
+          <div class="timeline-meta"><span class="timeline-date">Aug 2024 – Present</span><span class="timeline-institution">Lovely Professional University, Phagwara</span></div>
+          <div class="timeline-degree">Master of Computer Applications (MCA)</div>
+          <p style="font-size:0.85rem;color:var(--muted);">Focused on advanced computing, software development, and IT systems.</p>
+          <span class="timeline-score">📊 CGPA: 6.7 / 10.0</span>
+        </div>
+      </div>
+      <div class="timeline-item fade-up">
+        <div class="timeline-card">
+          <div class="timeline-meta"><span class="timeline-date">Jun 2020 – Jun 2023</span><span class="timeline-institution">Dr. B.R. Ambedkar University, Srikakulam</span></div>
+          <div class="timeline-degree">Bachelor of Computer Applications (BCA)</div>
+          <p style="font-size:0.85rem;color:var(--muted);">Core foundation in programming, databases, and computer science fundamentals.</p>
+          <span class="timeline-score">📊 CGPA: 6.96 / 10.0</span>
+        </div>
+      </div>
+      <div class="timeline-item fade-up">
+        <div class="timeline-card">
+          <div class="timeline-meta"><span class="timeline-date">2018 – 2020</span><span class="timeline-institution">Board of Intermediate Education, Visakhapatnam</span></div>
+          <div class="timeline-degree">Intermediate (Class 12) — MPC</div>
+          <span class="timeline-score">📊 Score: 63%</span>
+        </div>
+      </div>
+      <div class="timeline-item fade-up">
+        <div class="timeline-card">
+          <div class="timeline-meta"><span class="timeline-date">2016 – 2017</span><span class="timeline-institution">Board of Secondary Education, Srikakulam</span></div>
+          <div class="timeline-degree">Class 10 (SSC)</div>
+          <span class="timeline-score">📊 Score: 87%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label fade-up">04 / Work</p>
+  <h2 class="section-title fade-up">Featured <span style="color:var(--accent)">Projects</span></h2>
+  <div class="projects-grid">
+    <div class="project-card fade-up">
+      <div class="project-num">01</div>
+      <div class="project-title">IT Service Desk Chatbot</div>
+      <div class="project-desc">An automated support system simulating first-level helpdesk operations for common IT queries including password resets and basic troubleshooting.</div>
+      <div class="project-tech"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">MySQL</span></div>
+      <ul class="project-points">
+        <li>Simulated L1 helpdesk operations for common technical queries</li>
+        <li>Designed incident categorization based on ITIL principles</li>
+        <li>Built knowledge base docs for 20+ common technical scenarios</li>
+        <li>Implemented ticket routing and escalation workflow logic</li>
+      </ul>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-num">02</div>
+      <div class="project-title">Responsive Portfolio Website</div>
+      <div class="project-desc">A fully responsive personal portfolio built with modern HTML5 and CSS3, showcasing mobile-first design principles and cross-device compatibility.</div>
+      <div class="project-tech"><span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span><span class="tech-tag">Flexbox</span></div>
+      <ul class="project-points">
+        <li>Built as part of freeCodeCamp Responsive Web Design certification</li>
+        <li>Implemented Flexbox and media queries for full responsiveness</li>
+        <li>Followed mobile-first design and accessibility standards</li>
+      </ul>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-num">03</div>
+      <div class="project-title">Responsive Event Invitation Page</div>
+      <div class="project-desc">A clean, responsive event invitation webpage with polished layout and multi-screen support, emphasizing strong visual design principles.</div>
+      <div class="project-tech"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">Flexbox</span></div>
+      <ul class="project-points">
+        <li>Designed for mobile, tablet, and desktop compatibility</li>
+        <li>Used media queries for adaptive, fluid layout</li>
+        <li>Focused on clean visual hierarchy and user experience</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <p class="section-label fade-up">05 / Credentials</p>
+  <h2 class="section-title fade-up">Certifications &amp; <span style="color:var(--accent)">Learning</span></h2>
+  <div class="cert-grid">
+    <div class="cert-card fade-up"><div class="cert-icon">📋</div><div class="cert-title">ITIL Foundation</div><div class="cert-issuer">ITIL / Axelos</div><span class="cert-status status-progress">⏳ In Progress — Mar 2026</span></div>
+    <div class="cert-card fade-up"><div class="cert-icon">🌐</div><div class="cert-title">Web Applications in PHP</div><div class="cert-issuer">Coursera</div><span class="cert-status status-done">✓ Aug 2025</span></div>
+    <div class="cert-card fade-up"><div class="cert-icon">🎨</div><div class="cert-title">Responsive Web Design</div><div class="cert-issuer">freeCodeCamp</div><span class="cert-status status-done">✓ Apr 2025</span></div>
+    <div class="cert-card fade-up"><div class="cert-icon">📈</div><div class="cert-title">Digital Marketing Fundamentals</div><div class="cert-issuer">Self-Study</div><span class="cert-status status-done">✓ Completed</span></div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <p class="section-label fade-up">06 / Impact</p>
+  <h2 class="section-title fade-up">Leadership &amp; <span style="color:var(--accent)">Activities</span></h2>
+  <div class="leadership-card fade-up">
+    <div class="leadership-icon">🏅</div>
+    <div>
+      <div class="leadership-title">NSS Leader — National Service Scheme</div>
+      <div class="leadership-desc">Appointed as NSS Leader in college for demonstrating commitment, responsibility, and leadership skills. Successfully led a team of 30+ volunteers in organizing impactful social service programs including blood donation camps, cleanliness drives, and community awareness campaigns.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label fade-up">07 / Connect</p>
+  <h2 class="section-title fade-up">Get In <span style="color:var(--accent)">Touch</span></h2>
+  <div class="contact-grid">
+    <div class="fade-up">
+      <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.5rem;margin-bottom:16px;">Let's work together</h3>
+      <p style="color:var(--muted);font-size:0.92rem;line-height:1.8;margin-bottom:32px;">I'm actively looking for entry-level IT Support, Service Desk, or junior web development roles. Feel free to reach out!</p>
+      <a href="mailto:mehersagar.sundar@gmail.com" class="contact-link">✉️ &nbsp; mehersagar.sundar@gmail.com</a>
+      <a href="tel:+916301863691" class="contact-link">📱 &nbsp; +91 6301863691</a>
+      <a href="https://www.linkedin.com/in/meher-sagar-5b5974262" class="contact-link" target="_blank">💼 &nbsp; linkedin.com/in/meher-sagar-5b5974262</a>
+      <a href="https://github.com/mehersagar23" class="contact-link" target="_blank">🐙 &nbsp; github.com/mehersagar23</a>
+    </div>
+    <div class="fade-up">
+      <div class="form-group"><label class="form-label">YOUR NAME</label><input type="text" class="form-input" placeholder="John Doe"></div>
+      <div class="form-group"><label class="form-label">EMAIL ADDRESS</label><input type="email" class="form-input" placeholder="you@example.com"></div>
+      <div class="form-group"><label class="form-label">MESSAGE</label><textarea class="form-textarea" placeholder="Hi Meher, I'd like to discuss..."></textarea></div>
+      <button class="btn-primary" onclick="alert('Please email directly at mehersagar.sundar@gmail.com')">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed &amp; built with ❤️ — <span>Meher Sagar</span> &copy; 2025</p>
+  <p style="margin-top:8px;font-size:0.75rem;">MCA Student · IT Support Specialist · Phagwara, Punjab</p>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = -100, my = -100, rx = -100, ry = -100;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animateCursor() {
+  cursor.style.left = (mx - 6) + 'px'; cursor.style.top = (my - 6) + 'px';
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ring.style.left = (rx - 18) + 'px'; ring.style.top = (ry - 18) + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+document.querySelectorAll('a,button,.skill-card,.project-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2.5)'; ring.style.transform = 'scale(1.5)'; });
+  el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.transform = 'scale(1)'; });
+});
+
+// Fade-up on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Skill bars animate on scroll
+const barObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+        setTimeout(() => { bar.style.width = bar.getAttribute('data-width') + '%'; }, 200);
+      });
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('section').forEach(s => barObserver.observe(s));
+</script>
+</body>
+</html>
